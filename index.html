@@ -8,20 +8,18 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
-        
-        /* شريط التنبيه العلوي للانتقال التلقائي */
+
         .timer-bar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px);
             padding: 10px 20px; text-align: center; font-size: 14px;
             border-bottom: 1px solid #d4af37; color: #ffd700;
         }
 
-        /* تنسيق كل قسم */
         .section-card {
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 60px 15px 30px;
+            padding: 65px 15px 30px;
             border-bottom: 2px solid #1e293b;
         }
 
@@ -49,51 +47,15 @@
 <body>
 
     <div class="timer-bar" id="timer-box">
-        سيتم الانتقال تلقائياً إلى المتجر الشامل خلال <span id="countdown">40</span> ثانية (أو مرر للأسفل للتصفح)
+        سيتم الانتقال تلقائياً إلى القسم التالي خلال <span id="countdown">40</span> ثانية (أو مرر للأسفل للتصفح)
     </div>
 
     <!-- 1. القسم الأول: شحن دولي عالمي -->
     <section id="sec-shipping" class="section-card">
-        <img src="images/shipping.png" alt="شحن دولي عالمي">
+        <img src="shipping.jpg" alt="شحن دولي عالمي">
         <div class="actions">
-            <a href="sections/shipping.html" class="btn btn-primary">فتح ملف الشحن الدولي</a>
-            <a href="https://wa.me/22200000000?text=استفسار%20عن%20الشحن%20الدولي" class="btn btn-whatsapp">تواصل واتساب</a>
-        </div>
-    </section>
-
-    <!-- 2. القسم الثاني: المتجر الشامل -->
-    <section id="sec-global" class="section-card">
-        <img src="images/global.png" alt="متجر عالمي شامل">
-        <div class="actions">
-            <a href="sections/global.html" class="btn btn-primary">تصفح المتجر الشامل</a>
-            <a href="https://wa.me/22200000000?text=طلب%20من%20المتجر%20الشامل" class="btn btn-whatsapp">اطلب الآن</a>
-        </div>
-    </section>
-
-    <!-- 3. القسم الثالث: عالم الجمال والأنوثة -->
-    <section id="sec-beauty" class="section-card">
-        <img src="images/beauty.png" alt="عالم الجمال والأنوثة">
-        <div class="actions">
-            <a href="sections/beauty.html" class="btn btn-primary">فتح قسم الجمال والعطور</a>
-            <a href="https://wa.me/22200000000?text=طلب%20منتجات%20تجميل" class="btn btn-whatsapp">اطلب الآن</a>
-        </div>
-    </section>
-
-    <!-- 4. القسم الرابع: كل ما تحتاجه المرأة -->
-    <section id="sec-women1" class="section-card">
-        <img src="images/women-1.png" alt="كل ما تحتاجه المرأة">
-        <div class="actions">
-            <a href="sections/women-1.html" class="btn btn-primary">فتح قسم الأزياء والحقائب</a>
-            <a href="https://wa.me/22200000000?text=طلب%20أزياء%20وحقائب" class="btn btn-whatsapp">اطلب الآن</a>
-        </div>
-    </section>
-
-    <!-- 5. القسم الخامس: متجرك الشامل (أزياء ومجوهرات) -->
-    <section id="sec-women2" class="section-card">
-        <img src="images/women-2.png" alt="متجرك الشامل">
-        <div class="actions">
-            <a href="sections/women-2.html" class="btn btn-primary">فتح قسم المجوهرات والإكسسوارات</a>
-            <a href="https://wa.me/22200000000?text=طلب%20مجوهرات" class="btn btn-whatsapp">اطلب الآن</a>
+            <a href="shipping.html" class="btn btn-primary">فتح ملف الشحن الدولي</a>
+            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الاستفسار%20عن%20الشحن%20الدولي" class="btn btn-whatsapp">تواصل واتساب</a>
         </div>
     </section>
 
@@ -103,7 +65,6 @@
         const timerBox = document.getElementById('timer-box');
         let userScrolled = false;
 
-        // إلغاء الانتقال التلقائي إذا بدأ المستخدم بالتمرير يدوياً
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100 && !userScrolled) {
                 userScrolled = true;
@@ -122,7 +83,8 @@
             if (seconds <= 0) {
                 clearInterval(interval);
                 timerBox.style.display = 'none';
-                document.getElementById('sec-global').scrollIntoView({ behavior: 'smooth' });
+                const nextSec = document.getElementById('sec-global');
+                if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
             }
         }, 1000);
     </script>
