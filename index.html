@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجرك العالمي الشامل</title>
+    <title>متجرك الشامل</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         html { scroll-behavior: smooth; }
@@ -67,11 +67,11 @@
         </div>
     </section>
 
-    <!-- 2. القسم الثاني: متجر عالمي شامل -->
-    <section id="sec-global" class="section-card">
-        <img src="global.jpg" alt="متجر عالمي شامل">
+    <!-- 2. القسم الثاني: المتجر -->
+    <section id="sec-store" class="section-card">
+        <img src="store.jpg" alt="متجر شامل">
         <div class="actions">
-            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20من%20المتجر%20العالمي%20الشامل" class="btn btn-whatsapp">تواصل واتساب</a>
+            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20من%20المتجر" class="btn btn-whatsapp">تواصل واتساب</a>
         </div>
     </section>
 
@@ -86,7 +86,7 @@
 
         setTimeout(() => {
             if (!userScrolled) {
-                const nextSec = document.getElementById('sec-global');
+                const nextSec = document.getElementById('sec-store');
                 if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
             }
         }, 40000);
