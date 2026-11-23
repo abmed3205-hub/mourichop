@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر قايتك الشامل - MauriShop</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background-color: #0f172a; color: #fff; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
 
-        /* واجهة البداية: تظهر لمدة نصف ثانية فقط على كامل الشاشة وتختفي تلقائياً */
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            background-color: #0f172a;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-anchor: none;
+        }
+
+        /* واجهة البداية: تظهر لمدة نصف ثانية فقط على كامل الشاشة ثم تختفي */
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -19,6 +31,8 @@
             background: #070d1a;
             overflow: hidden;
             pointer-events: none;
+            opacity: 1;
+            visibility: visible;
             transition: opacity 0.15s ease, visibility 0.15s ease;
         }
 
@@ -34,8 +48,10 @@
             display: block;
         }
 
-        /* الواجهة الرئيسية */
+        /* الحاوية الرئيسية الثابتة */
         .feed {
+            position: relative;
+            z-index: 1;
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
@@ -48,6 +64,7 @@
         .img-link {
             display: block;
             width: 100%;
+            flex-shrink: 0;
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -65,9 +82,11 @@
             opacity: 0.94;
         }
 
+        /* حقل زر الواتساب ثابت في أسفل القائمة فقط */
         .whatsapp-box {
-            margin: 16px 0 26px;
             width: 100%;
+            flex-shrink: 0;
+            margin: 16px 0 26px;
             display: flex;
             justify-content: center;
         }
@@ -148,7 +167,7 @@
 </head>
 <body>
 
-    <!-- واجهة البداية: تظهر لمدة نصف ثانية وتختفي تلقائياً -->
+    <!-- واجهة البداية: تظهر لمدة نصف ثانية على كامل الشاشة ثم تختفي -->
     <div id="splash-screen">
         <img src="welcome.jpg" alt="MauriShop متجر قايتك">
     </div>
@@ -206,25 +225,44 @@
     </main>
 
     <script>
-        setTimeout(() => {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        let splashTimer = null;
+        let userInteracted = false;
+
+        function resetToTopAndRunSplash() {
+            window.scrollTo(0, 0);
             const splashEl = document.getElementById('splash-screen');
-            if (splashEl) {
+            if (!splashEl) return;
+
+            if (splashTimer) {
+                clearTimeout(splashTimer);
+            }
+
+            splashEl.classList.remove('hide');
+            splashTimer = setTimeout(() => {
                 splashEl.classList.add('hide');
-            }
-        }, 500);
+                window.scrollTo(0, 0);
+            }, 500);
+        }
 
-        let userScrolled = false;
+        window.addEventListener('DOMContentLoaded', resetToTopAndRunSplash);
+        window.addEventListener('pageshow', resetToTopAndRunSplash);
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                userScrolled = true;
-            }
+        ['scroll', 'touchstart', 'pointerdown', 'wheel'].forEach((evt) => {
+            window.addEventListener(evt, () => {
+                userInteracted = true;
+            }, { passive: true });
         });
 
         setTimeout(() => {
-            if (!userScrolled) {
+            if (!userInteracted) {
                 const nextSec = document.getElementById('sec-store');
-                if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
+                if (nextSec) {
+                    nextSec.scrollIntoView({ behavior: 'auto' });
+                }
             }
         }, 40000);
     </script>
