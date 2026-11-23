@@ -9,19 +9,16 @@
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
 
-        /* شاشة البداية لمدة 15 ثانية */
+        /* واجهة البداية: صورة كاملة على مدار الشاشة لمدة 5 ثوانٍ */
         #splash-screen {
             position: fixed;
             inset: 0;
             z-index: 9999;
+            width: 100vw;
+            height: 100dvh;
             background: #070d1a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-            gap: 14px;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
         #splash-screen.hide {
@@ -30,51 +27,11 @@
             pointer-events: none;
         }
 
-        .splash-img-wrap {
+        #splash-screen img {
             width: 100%;
-            max-width: 680px;
-            max-height: 78vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .splash-img-wrap img {
-            width: 100%;
-            max-height: 78vh;
-            object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
-        }
-
-        .splash-controls {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .splash-timer {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid #eab308;
-            color: #fef08a;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .splash-skip-btn {
-            background: linear-gradient(180deg, #1ea846 0%, #0e6b29 100%);
-            color: #fff;
-            border: 2px solid #eab308;
-            padding: 9px 22px;
-            border-radius: 999px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         /* الواجهة الرئيسية */
@@ -191,15 +148,9 @@
 </head>
 <body>
 
-    <!-- واجهة البداية لمدة 15 ثانية -->
+    <!-- واجهة البداية: صورة كاملة لمدة 5 ثوانٍ -->
     <div id="splash-screen">
-        <div class="splash-img-wrap" onclick="closeSplash()">
-            <img src="welcome.jpg" alt="MauriShop متجر قايتك">
-        </div>
-        <div class="splash-controls">
-            <span class="splash-timer">الانتقال التلقائي خلال <span id="countdown">15</span> ث</span>
-            <button type="button" class="splash-skip-btn" onclick="closeSplash()">دخول الآن ⬅</button>
-        </div>
+        <img src="welcome.jpg" alt="MauriShop متجر قايتك">
     </div>
 
     <main class="feed">
@@ -255,30 +206,12 @@
     </main>
 
     <script>
-        let splashClosed = false;
-        let remaining = 15;
-        const countdownEl = document.getElementById('countdown');
-        const splashEl = document.getElementById('splash-screen');
-
-        const intervalId = setInterval(() => {
-            if (splashClosed) return;
-            remaining -= 1;
-            if (countdownEl && remaining >= 0) {
-                countdownEl.textContent = remaining;
-            }
-            if (remaining <= 0) {
-                closeSplash();
-            }
-        }, 1000);
-
-        function closeSplash() {
-            if (splashClosed) return;
-            splashClosed = true;
-            clearInterval(intervalId);
+        setTimeout(() => {
+            const splashEl = document.getElementById('splash-screen');
             if (splashEl) {
                 splashEl.classList.add('hide');
             }
-        }
+        }, 5000);
 
         let userScrolled = false;
 
