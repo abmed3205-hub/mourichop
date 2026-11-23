@@ -9,84 +9,79 @@
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
 
-        .timer-bar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px);
-            padding: 10px 20px; text-align: center; font-size: 14px;
-            border-bottom: 1px solid #d4af37; color: #ffd700;
-        }
-
         .section-card {
             min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 65px 15px 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
             border-bottom: 2px solid #1e293b;
         }
 
         .section-card img {
-            max-width: 100%; max-height: 75vh;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 82vh;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
             object-fit: contain;
         }
 
         .actions {
-            margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;
+            margin-top: 18px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
         }
 
         .btn {
-            padding: 12px 28px; border-radius: 50px; text-decoration: none;
-            font-weight: bold; font-size: 16px; transition: 0.3s;
+            padding: 14px 34px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s;
+            text-align: center;
         }
 
-        .btn-primary { background: linear-gradient(45deg, #d4af37, #f3e5ab); color: #000; }
-        .btn-whatsapp { background: #25D366; color: #fff; }
-        .btn:hover { transform: scale(1.05); }
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            min-width: 220px;
+        }
+
+        .btn:hover { transform: scale(1.04); }
     </style>
 </head>
 <body>
-
-    <div class="timer-bar" id="timer-box">
-        سيتم الانتقال تلقائياً إلى القسم التالي خلال <span id="countdown">40</span> ثانية (أو مرر للأسفل للتصفح)
-    </div>
 
     <!-- 1. القسم الأول: شحن دولي عالمي -->
     <section id="sec-shipping" class="section-card">
         <img src="shipping.jpg" alt="شحن دولي عالمي">
         <div class="actions">
-            <a href="shipping.html" class="btn btn-primary">فتح ملف الشحن الدولي</a>
             <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الاستفسار%20عن%20الشحن%20الدولي" class="btn btn-whatsapp">تواصل واتساب</a>
         </div>
     </section>
 
     <script>
-        let seconds = 40;
-        const countdownEl = document.getElementById('countdown');
-        const timerBox = document.getElementById('timer-box');
         let userScrolled = false;
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100 && !userScrolled) {
+            if (window.scrollY > 100) {
                 userScrolled = true;
-                timerBox.style.display = 'none';
             }
         });
 
-        const interval = setInterval(() => {
-            if (userScrolled) {
-                clearInterval(interval);
-                return;
-            }
-            seconds--;
-            countdownEl.textContent = seconds;
-
-            if (seconds <= 0) {
-                clearInterval(interval);
-                timerBox.style.display = 'none';
+        setTimeout(() => {
+            if (!userScrolled) {
                 const nextSec = document.getElementById('sec-global');
                 if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
             }
-        }, 1000);
+        }, 40000);
     </script>
 
 </body>
