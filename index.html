@@ -3,12 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر قايتك الشامل</title>
+    <title>متجر قايتك الشامل - MauriShop</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
 
+        /* شاشة البداية لمدة 15 ثانية */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #070d1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            gap: 14px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #splash-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-img-wrap {
+            width: 100%;
+            max-width: 680px;
+            max-height: 78vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .splash-img-wrap img {
+            width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
+        }
+
+        .splash-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .splash-timer {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #eab308;
+            color: #fef08a;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .splash-skip-btn {
+            background: linear-gradient(180deg, #1ea846 0%, #0e6b29 100%);
+            color: #fff;
+            border: 2px solid #eab308;
+            padding: 9px 22px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* الواجهة الرئيسية */
         .feed {
             width: 100%;
             max-width: 900px;
@@ -122,6 +191,17 @@
 </head>
 <body>
 
+    <!-- واجهة البداية لمدة 15 ثانية -->
+    <div id="splash-screen">
+        <div class="splash-img-wrap" onclick="closeSplash()">
+            <img src="welcome.jpg" alt="MauriShop متجر قايتك">
+        </div>
+        <div class="splash-controls">
+            <span class="splash-timer">الانتقال التلقائي خلال <span id="countdown">15</span> ث</span>
+            <button type="button" class="splash-skip-btn" onclick="closeSplash()">دخول الآن ⬅</button>
+        </div>
+    </div>
+
     <main class="feed">
         <!-- 1. شحن دولي عالمي -->
         <a id="sec-shipping" class="img-link" href="https://wa.me/22232050583?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%85%D8%AA%D8%AC%D8%B1%20%D9%82%D8%A7%D9%8A%D8%AA%D9%83%20%D8%A7%D8%B1%D9%8A%D8%AF%20%D8%AA%D9%81%D8%A7%D8%B5%D9%8A%D9%84%20%D8%B9%D9%86%20%D9%87%D8%B0%20%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC%20%D9%88%D8%A7%D9%84%D8%A5%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%D9%87">
@@ -175,6 +255,31 @@
     </main>
 
     <script>
+        let splashClosed = false;
+        let remaining = 15;
+        const countdownEl = document.getElementById('countdown');
+        const splashEl = document.getElementById('splash-screen');
+
+        const intervalId = setInterval(() => {
+            if (splashClosed) return;
+            remaining -= 1;
+            if (countdownEl && remaining >= 0) {
+                countdownEl.textContent = remaining;
+            }
+            if (remaining <= 0) {
+                closeSplash();
+            }
+        }, 1000);
+
+        function closeSplash() {
+            if (splashClosed) return;
+            splashClosed = true;
+            clearInterval(intervalId);
+            if (splashEl) {
+                splashEl.classList.add('hide');
+            }
+        }
+
         let userScrolled = false;
 
         window.addEventListener('scroll', () => {
