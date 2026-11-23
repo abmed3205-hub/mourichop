@@ -13,32 +13,25 @@
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
-            padding: 12px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 8px;
         }
 
-        .section-card {
+        .gallery-item {
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #131c31;
-            border-radius: 16px;
-            padding: 12px;
-            border: 1px solid #1e293b;
         }
 
-        .section-card img {
+        .gallery-item img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 10px;
             display: block;
         }
 
-        .actions {
-            margin-top: 12px;
+        .whatsapp-box {
+            margin: 14px 0 24px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -49,11 +42,11 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
-            padding: 12px 28px;
+            font-size: 17px;
+            padding: 14px 32px;
             border-radius: 50px;
             width: 100%;
-            max-width: 340px;
+            max-width: 380px;
             text-align: center;
             transition: 0.25s;
         }
@@ -64,21 +57,20 @@
 <body>
 
     <main class="feed">
-        <!-- 1. القسم الأول: شحن دولي عالمي -->
-        <section id="sec-shipping" class="section-card">
+        <!-- 1. الصورة الأولى: شحن دولي عالمي -->
+        <div id="sec-shipping" class="gallery-item">
             <img src="shipping.jpg" alt="شحن دولي عالمي">
-            <div class="actions">
-                <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الاستفسار%20عن%20الشحن%20الدولي" class="btn-whatsapp">تواصل واتساب</a>
-            </div>
-        </section>
+        </div>
 
-        <!-- 2. القسم الثاني: المتجر -->
-        <section id="sec-store" class="section-card">
+        <!-- 2. الصورة الثانية: المتجر -->
+        <div id="sec-store" class="gallery-item">
             <img src="store.jpg" alt="متجر شامل">
-            <div class="actions">
-                <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20من%20المتجر" class="btn-whatsapp">تواصل واتساب</a>
-            </div>
-        </section>
+        </div>
+
+        <!-- زر واتساب واحد في الأسفل -->
+        <div class="whatsapp-box">
+            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20والاستفسار" class="btn-whatsapp">تواصل واتساب</a>
+        </div>
     </main>
 
     <script>
