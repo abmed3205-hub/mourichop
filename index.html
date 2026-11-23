@@ -9,7 +9,7 @@
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
 
-        /* واجهة البداية: صورة كاملة على مدار الشاشة لمدة 5 ثوانٍ */
+        /* واجهة البداية: تظهر لمدة ثانيتين فقط على كامل الشاشة وتختفي تلقائياً */
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -18,13 +18,13 @@
             height: 100dvh;
             background: #070d1a;
             overflow: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
         }
 
         #splash-screen.hide {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
 
         #splash-screen img {
@@ -148,7 +148,7 @@
 </head>
 <body>
 
-    <!-- واجهة البداية: صورة كاملة لمدة 5 ثوانٍ -->
+    <!-- واجهة البداية: تظهر لمدة ثانيتين وتختفي تلقائياً -->
     <div id="splash-screen">
         <img src="welcome.jpg" alt="MauriShop متجر قايتك">
     </div>
@@ -211,7 +211,7 @@
             if (splashEl) {
                 splashEl.classList.add('hide');
             }
-        }, 5000);
+        }, 2000);
 
         let userScrolled = false;
 
