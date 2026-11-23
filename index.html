@@ -9,77 +9,83 @@
         html { scroll-behavior: smooth; }
         body { background-color: #0f172a; color: #fff; }
 
+        .feed {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
         .section-card {
-            min-height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            background: #131c31;
+            border-radius: 16px;
             padding: 12px;
-            border-bottom: 2px solid #1e293b;
+            border: 1px solid #1e293b;
         }
 
         .section-card img {
             width: 100%;
-            max-width: 1050px;
-            max-height: 82vh;
-            border-radius: 16px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
-            object-fit: contain;
+            height: auto;
+            border-radius: 12px;
+            display: block;
         }
 
         .actions {
-            margin-top: 18px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
+            margin-top: 12px;
             width: 100%;
-        }
-
-        .btn {
-            padding: 14px 34px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 17px;
-            transition: 0.3s;
-            text-align: center;
+            display: flex;
+            justify-content: center;
         }
 
         .btn-whatsapp {
             background: #25D366;
             color: #fff;
-            min-width: 220px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            transition: 0.25s;
         }
 
-        .btn:hover { transform: scale(1.04); }
+        .btn-whatsapp:hover { transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-    <!-- 1. القسم الأول: شحن دولي عالمي -->
-    <section id="sec-shipping" class="section-card">
-        <img src="shipping.jpg" alt="شحن دولي عالمي">
-        <div class="actions">
-            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الاستفسار%20عن%20الشحن%20الدولي" class="btn btn-whatsapp">تواصل واتساب</a>
-        </div>
-    </section>
+    <main class="feed">
+        <!-- 1. القسم الأول: شحن دولي عالمي -->
+        <section id="sec-shipping" class="section-card">
+            <img src="shipping.jpg" alt="شحن دولي عالمي">
+            <div class="actions">
+                <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الاستفسار%20عن%20الشحن%20الدولي" class="btn-whatsapp">تواصل واتساب</a>
+            </div>
+        </section>
 
-    <!-- 2. القسم الثاني: المتجر -->
-    <section id="sec-store" class="section-card">
-        <img src="store.jpg" alt="متجر شامل">
-        <div class="actions">
-            <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20من%20المتجر" class="btn btn-whatsapp">تواصل واتساب</a>
-        </div>
-    </section>
+        <!-- 2. القسم الثاني: المتجر -->
+        <section id="sec-store" class="section-card">
+            <img src="store.jpg" alt="متجر شامل">
+            <div class="actions">
+                <a href="https://wa.me/22200000000?text=مرحباً،%20أريد%20الطلب%20من%20المتجر" class="btn-whatsapp">تواصل واتساب</a>
+            </div>
+        </section>
+    </main>
 
     <script>
         let userScrolled = false;
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 80) {
                 userScrolled = true;
             }
         });
